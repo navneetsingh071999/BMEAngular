@@ -1,0 +1,59 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center"><span class="fas fa-users fa-7x"></span></h2>
+                <h1 class="text-center">Sing Up</h1>
+                <!-- 
+                    CREATING LOGIN FORM
+                -->
+
+                <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+                    <mat-form-field class="full-width">
+                        <mat-label>First Name: </mat-label>
+                        <input ngModel type="text" matInput required name="firstName" id="firstName">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Last Name: </mat-label>
+                        <input ngModel type="text" matInput required name="lastName" id="lastName">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Email: </mat-label>
+                        <input ngModel type="email" matInput required name="email" id="email">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Password: </mat-label>
+                        <input ngModel type="password" name="password" matInput required id="password">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Mobile Number: </mat-label>
+                        <input ngModel type="text" name="mobileNo" matInput required id="mobileNo">
+                    </mat-form-field>
+
+                    <mat-radio-group class="full-width">
+                        <mat-radio-button ngDefaultControl ngModel name="gender" required value ="male">Male</mat-radio-button> &nbsp;
+                        <mat-radio-button ngDefaultControl ngModel name="gender" required value="female">Female</mat-radio-button>
+                    </mat-radio-group>
+                        
+                   
+                    <div class="cotainer text-center">
+                        <button type="submit" mat-raised-button color="primary">Signup</button>
+                        <button type="reset" class="ms-3" mat-raised-button color="accent">Reset</button>
+                    </div>
+
+                </form>
+                <p style="text-align:right">Already Registered? <a routerLink="/login" class="d-inline">Login</a>  
+               <!--
+                JUST FOR TESTING : 
+                {{credentials.userName}} {{credentials.password}}
+               --> 
+
+            </div>
+        </div>
+        
+    </div>
+</div>

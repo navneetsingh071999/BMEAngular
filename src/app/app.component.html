@@ -1,3 +1,67 @@
 <app-navbar></app-navbar>
 
-  <router-outlet></router-outlet>
+<mat-sidenav-container id="mainCont">
+  <mat-sidenav #sidenav mode = "side">
+    <div class="fas fa-tachometer-alt fa-2x left">
+      <b>
+        <h2 class="d-inline text-center">&nbsp;&nbsp;Dashboard</h2>
+      </b>
+    </div>
+    <hr/>
+    <span class="fas fa-home"><h2 class="d-inline"><a routerLink="/">Home</a></h2></span><br/>
+    <span class="fas fa-calendar-check"><h2 class = "d-inline"><a routerLink="booked">Booked Events</a></h2></span>
+    <span class="fas fa-calendar-alt"><h2 class = "d-inline"><a routerLink="registered"> Registered Events</a></h2></span>
+    <hr/>
+    <span *ngIf="role=='ADMIN'" class="fas fa-user-plus"><h2 class = "d-inline"><a routerLink="newUsers">New Users</a></h2></span>
+    <span *ngIf="role=='ADMIN'" class="fas fa-bullhorn"><h2 class = "d-inline"><a routerLink="newevents">New Events</a></h2></span>
+    
+
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <button (click) = "sidenav.toggle()" class="btn btn-lg"><span class="fas fa-align-justify   "></span></button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
+
+
+
+<!-- Booking Modal -->
+<div class="modal fade"  id="bookEvent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bookEventLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="bookEvent">Book Events</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form #bookingForm="ngForm"> 
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" ngModel name="personName" class="form-control" id="name">
+          </div>
+          <div class="mb-3">
+              <label for="seats" class="form-label">Seats</label>
+              <input type="number" ngModel name="seats" class="form-control" id="seats">
+          </div>
+
+          <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" ngModel name="email" class="form-control" id="email">
+            </div>
+          
+          <div class="modal-footer">
+            <button type="button" id="bookClose" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button (click)="bookEvent(bookingForm)"  type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+
+  
+    </div>
+  </div>
+</div>
+
+

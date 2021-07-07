@@ -1,0 +1,15 @@
+<div class="container" >
+    <div class="row">
+
+        <div class="col-md-6 card mt-3 ms-3 " style="width: 20rem; background-color: darkred; color:whitesmoke" *ngFor="let employee of newUsers">
+            <div class="card-body">
+                <h1 class="card-title">{{employee.firstName}} {{employee.lastName}}</h1>
+                <h3 class="card-subtitle mb-2">email: {{employee.email}}</h3>
+                <p>Mobile Number : {{employee.mobileNo}}</p>
+                <p>Gender: {{employee.gender}}</p>
+                <button type="button" class="card-link btn tooltips" (click) = "authorizeUser(employee.email)">Authorize</button>
+            </div>
+        </div>
+    </div>
+</div>
+

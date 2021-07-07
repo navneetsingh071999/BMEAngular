@@ -14,14 +14,34 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { AuthGuard } from './services/auth.guard';
-import { AuthIntercepter } from './services/auth.interceptor';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { EventService } from './services/event.service';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { BookedeventsComponent } from './MyComponent/bookedevents/bookedevents.component';
+import { EventComponent } from './MyComponent/registered/event/event.component';
+import { RegistrationComponent } from './MyComponent/registration/registration.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { SuccessComponent } from './MyComponent/success/success.component';
+import { NewUserComponent } from './MyComponent/new-user/new-user.component';
+import { AdminService } from './services/admin.service';
+import { NewEventComponent } from './MyComponent/new-event/new-event.component';
+import { UserComponent } from './MyComponent/user/user.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    BookedeventsComponent,
+    EventComponent,
+    RegistrationComponent,
+    SuccessComponent,
+    NewUserComponent,
+    NewEventComponent,
+    UserComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -32,9 +52,18 @@ import { AuthIntercepter } from './services/auth.interceptor';
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatRadioModule
+  
   ],
-  providers: [LoginService, AuthGuard, [{provide : HTTP_INTERCEPTORS, useClass : AuthIntercepter, multi : true}]],
+  providers: [LoginService , AuthGuard, EventService, HomeComponent, EventComponent, AdminService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

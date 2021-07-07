@@ -1,5 +1,13 @@
-<div class="container">
-    <h1 class="text-center mt-3">Home</h1>
+<div class="container" >
+    <div class="row">
 
-    <a mat-raised-button color="primary" routerLink="/login">Login Here</a>
+        <div class="col-md-6 card mt-3 ms-3 " style="width: 20rem;" *ngFor="let approveEvent of approvedEvents">
+            <div class="card-body">
+                <h1 class="card-title">{{approveEvent.eventName}}</h1>
+                <h3 class="card-subtitle mb-2">Seats Remaning: {{approveEvent.capacity}}</h3>
+                <p>Date : {{approveEvent.dateTime}}</p>
+                <button type="button" class="card-link btn btn-success tooltips" (click) = "openModal(approveEvent, 'booking')">Book</button>
+            </div>
+        </div>
+    </div>
 </div>

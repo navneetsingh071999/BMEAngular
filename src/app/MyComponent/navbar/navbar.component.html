@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
-        <span><a mat-icon-button routerLink="/">Book My Events</a></span>
+        <span class="fas fa-calendar ">&nbsp;<a mat-icon-button routerLink="/">BookMyEvents</a></span>
         <span class="spacer"></span>
         <a *ngIf="!loggedIn" mat-icon-button routerLink="/login">Login</a>
-        <a *ngIf="loggedIn" mat-icon-button routerLink="/login">User</a>
+        <span *ngIf="loggedIn" class="fas fa-user" style="padding-right: 25px;">&nbsp;<a mat-icon-button routerLink="userDetails">{{user}}</a></span>
         <a *ngIf="loggedIn" mat-icon-button (click)="logout()">Logout</a>
 </mat-toolbar>

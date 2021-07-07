@@ -1,0 +1,14 @@
+<div class="container" >
+    <div class="row">
+
+        <div class="col-md-6 card mt-3 ms-3 " style="width: 20rem; background-color: darkred; color:whitesmoke" *ngFor="let event of newEvents">
+            <div class="card-body">
+                <h1 class="card-title">{{event.eventName}}</h1>
+                <h3 class="card-subtitle mb-2">Seats Required: {{event.capacity}}</h3>
+                <p>Bevereges Provided : {{event.beveregesNeeded}}</p>
+                <p>Date : {{event.dateTime}}</p>
+                <button type="button" class="card-link btn tooltips" (click) = "approveEvent(event.id)">Approve</button>
+            </div>
+        </div>
+    </div>
+</div>

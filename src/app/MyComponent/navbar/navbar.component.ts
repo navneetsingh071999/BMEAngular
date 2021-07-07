@@ -11,11 +11,21 @@ export class NavbarComponent implements OnInit {
 
 
   public loggedIn: boolean = false;
+  public load = 0;
+  user = localStorage.getItem("firstName");
 
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.loggedIn = this.loginService.isLoggedIn();
+    
+  }
+
+  refresh(){
+    if(this.load === 0){
+      window.location.href="/";
+      this.load = 1;
+    }
   }
 
   logout(){

@@ -1,0 +1,143 @@
+<div class="container">
+
+    <button (click)="toggleEventRefForm()" class="btn btn-primary float-end"><span class="fas fa-calendar-plus"></span>&nbsp;Organize Event</button><br/>
+    <!--Register Form-->
+    <div *ngIf="showRegForm" id="top">
+        <h1>Add Event</h1>
+        <form #AddEventForm="ngForm"> 
+         
+            <div class="mb-3">
+                <label for="name" class="form-label">Event Name</label>
+                <input type="text" ngModel name="eventName" class="form-control" id="eventName" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bevereges Needed</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" ngModel name="beveregesNeeded" id="beveregesNeededT" value="true" checked>
+                    <label for="beveregesNeededT" class="form-label">True</label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label"  for="beveregesNeededF" class="form-label">False</label>
+                    <input class="form-check-input" type="radio" ngModel name="beveregesNeeded"  id="beveregesNeededF" value="false">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity</label>
+                <input type="number" ngModel name="capacity" class="form-control" id="capacity" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" ngModel name="email" class="form-control" id="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="dateTime" class="form-label">From Date</label>
+                <input type="datetime-local" ngModel name="dateTime" class="form-control" id="dateTime" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="duaration" class="form-label">To Date</label>
+                <input type="datetime-local" ngModel name="duration" class="form-control" id="duaration" required>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" id="bookClose" class="btn btn-secondary" (click) = "toggleEventRefForm()">Close</button>
+                <button (click)="RegisterEvent(AddEventForm)"  type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+        <hr/>
+    </div>
+
+
+    <!--Update Form-->
+    <div *ngIf="showForm" id="top">
+        <h1>Update Event : {{updateEvent.eventName}}</h1>
+        <form #updateEventForm="ngForm"> 
+            
+            <div class="mb-3">
+               
+                <input type="number" ngModel="{{updateEvent.id}}" name="id" class="form-control" id="id" hidden>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Event Name</label>
+                <input type="text" ngModel="{{updateEvent.eventName}}" name="eventName" class="form-control" id="eventName">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bevereges Needed</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" ngModel name="beveregesNeeded" id="beveregesNeededT" value="true">
+                    <label for="beveregesNeededT" class="form-label">True</label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label"  for="beveregesNeededF" class="form-label">False</label>
+                    <input class="form-check-input" type="radio" ngModel name="beveregesNeeded"  id="beveregesNeededF" value="false">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity</label>
+                <input type="number" ngModel="{{updateEvent.capacity}}" name="capacity" class="form-control" id="capacity">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" ngModel name="email" class="form-control" id="email">
+            </div>
+
+            <div class="mb-3">
+                <label for="dateTime" class="form-label">From Date</label>
+                <input type="datetime-local" ngModel={{updateEvent.dateTime}} name="dateTime" class="form-control" id="dateTime">
+            </div>
+
+            <div class="mb-3">
+                <label for="duaration" class="form-label">To Date</label>
+                <input type="datetime-local" ngModel={{updateEvent.duaration}} name="duration" class="form-control" id="duaration">
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" id="bookClose" class="btn btn-secondary" (click) = "closeForm()">Close</button>
+                <button (click)="updateRegisteredEvent(updateEventForm)"  type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+        <hr/>
+    </div>
+
+
+
+    <h2>Approved Events: </h2>
+    <div class="row">
+
+        <div class="col-md-6 card mt-3 ms-3 " style="width: 20rem;" *ngFor="let approveEvent of approvedEvents">
+            <div class="card-body">
+                <h1 class="card-title">{{approveEvent.eventName}}</h1>
+                <h3 class="card-subtitle mb-2">Seats Remaning: {{approveEvent.capacity}}</h3>
+                <p>Date : {{approveEvent.dateTime}}</p>
+                <a (click) = "openModal(approveEvent, 'update')" class="card-link btn btn-warning">Update</a>
+                <a href="#top" class="card-link btn btn-danger" (click) = "deleteRegisteredEvent(approveEvent.id)">Delete</a>
+            </div>
+        </div>
+        
+    </div>
+    <br/>
+    <hr/>
+    <h2>Approval Pending: </h2>
+    <div class="row">
+
+        <div class="col-md-6 card mt-3 ms-3 " style="width: 20rem;" *ngFor="let approveEvent of pendingEvents">
+            <div class="card-body">
+                <h1 class="card-title">{{approveEvent.eventName}}</h1>
+                <h3 class="card-subtitle mb-2">Seats Remaning: {{approveEvent.capacity}}</h3>
+                <p>Date : {{approveEvent.dateTime}}</p>
+                <a (click) = "openModal(approveEvent, 'update')" class="card-link btn btn-warning">Update</a>
+                <a href="#top" class="card-link btn btn-danger" (click) = "deleteRegisteredEvent(approveEvent.id)">Delete</a>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+</div>
